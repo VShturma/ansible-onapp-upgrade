@@ -1,0 +1,11 @@
+---
+- name: Update onapp-hv-install
+  yum:
+    name: onapp-hv-install
+    state: latest
+
+- name: Install expect utility
+  yum:
+    name: expect
+    state: installed
+  when: onapp_version > 6.1

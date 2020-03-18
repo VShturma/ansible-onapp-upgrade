@@ -1,0 +1,8 @@
+---
+- name: Upgrade OnApp Backup Server installer package
+  yum:
+    name: onapp-bk-install
+    state: latest 
+
+- name: Upgrade Backup Server
+  command: /onapp/onapp-bk-install/onapp-bk-install.sh -a

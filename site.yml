@@ -1,5 +1,20 @@
 ---
-- hosts: kvm
+- hosts: static_kvm
   roles:
     - common
-    - static_kvm
+    - common-hv
+    - static-kvm
+  remote_user: root
+
+- hosts: static_xen
+  roles:
+    - common
+    - common-hv
+    - static-xen
+  remote_user: root
+
+- hosts: static_bs
+  roles:
+    - common
+    - static-bs
+  remote_user: root

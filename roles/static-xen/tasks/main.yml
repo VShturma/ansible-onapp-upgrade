@@ -1,0 +1,3 @@
+---
+- name: Upgrade XEN
+  command: /onapp/onapp-hv-install/onapp-hv-xen-install.sh -a

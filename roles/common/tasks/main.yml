@@ -1,14 +1,5 @@
 ---
 - name: Install OnApp repo
   command: rpm -Uvh http://rpm.repo.onapp.com/repo/onapp-repo-{{ onapp_version }}.noarch.rpm
-
-- name: Update onapp-hv-install
-  yum:
-    name: onapp-hv-install
-    state: latest
-
-- name: Install expect utility
-  yum:
-    name: expect
-    state: installed
-
+  register: command_result
+  failed_when: command_result.rc > 0 and 'already installed' not in command_result.stderr
