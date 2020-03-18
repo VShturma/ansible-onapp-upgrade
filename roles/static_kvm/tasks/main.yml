@@ -1,0 +1,3 @@
+---
+- name: Upgrade KVM
+  command: /onapp/onapp-hv-install/onapp-hv-kvm-install.sh -a
