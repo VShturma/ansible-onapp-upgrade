@@ -1,0 +1,7 @@
+- hosts: static_xen
+  roles:
+    - common
+    - common-hv
+    - static-xen
+  remote_user: root
+

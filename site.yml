@@ -1,20 +1,4 @@
 ---
-- hosts: static_kvm
-  roles:
-    - common
-    - common-hv
-    - static-kvm
-  remote_user: root
-
-- hosts: static_xen
-  roles:
-    - common
-    - common-hv
-    - static-xen
-  remote_user: root
-
-- hosts: static_bs
-  roles:
-    - common
-    - static-bs
-  remote_user: root
+- import_playbook: kvm.yml
+- import_playbook: xen.yml
+- import_playbook: bs.yml
