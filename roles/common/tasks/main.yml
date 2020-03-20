@@ -4,4 +4,6 @@
 - name: Install OnApp repo
   command: rpm -Uvh http://rpm.repo.onapp.com/repo/onapp-repo-{{ onapp_version }}.noarch.rpm
   register: command_result
+  # if you see an error like 'package is already installed' but still want to proceed
+  # then uncomment the line below
   failed_when: command_result.rc > 0 and 'already installed' not in command_result.stderr
