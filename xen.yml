@@ -1,3 +1,6 @@
+# file: xen.yml
+
+---
 - hosts: static_xen
   roles:
     - common

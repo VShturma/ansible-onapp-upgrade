@@ -9,6 +9,10 @@ DB_HOST=$(awk '/host:/ {print $2; exit}' $DB_CONF)
 DB_PORT=$(awk '/port:/ {print $2; exit}' $DB_CONF)
 DB_USERNAME=$(awk '/username:/ {print $2; exit}' $DB_CONF)
 
+####################################################
+# Generate inventory of static KVM Hypervisors
+####################################################
+
 read -ra STATIC_KVM_IPS -d '' <<<$(mysql -p${DB_PASSWORD} ${DB} -u ${DB_USERNAME} -h ${DB_HOST} --port=${DB_PORT} -se \
 "SELECT ip_address FROM hypervisors WHERE hypervisor_type = 'kvm' AND enabled = 1 AND mac IS NULL")
 
@@ -17,6 +21,10 @@ for ip in "${STATIC_KVM_IPS[@]}"
 do
   echo $ip  >> $INVENTORY
 done
+
+####################################################
+# Generate inventory of static XEN Hypervisors
+####################################################
 
 read -ra STATIC_XEN_IPS -d '' <<<$(mysql -p${DB_PASSWORD} ${DB} -u ${DB_USERNAME} -h ${DB_HOST} --port=${DB_PORT} -se \
 "SELECT ip_address FROM hypervisors WHERE hypervisor_type = 'xen' AND enabled = 1 AND mac IS NULL")
@@ -27,6 +35,10 @@ do
   echo $ip  >> $INVENTORY
 done
 
+####################################################
+# Generate inventory of static Backup Servers
+####################################################
+
 read -ra STATIC_BK_IPS -d '' <<<$(mysql -p${DB_PASSWORD} ${DB} -u ${DB_USERNAME} -h ${DB_HOST} --port=${DB_PORT} -se \
 "SELECT ip_address FROM backup_servers WHERE enabled = 1 AND ip_address NOT IN (SELECT ip_address FROM hypervisors)")
 
@@ -35,6 +47,10 @@ for ip in "${STATIC_BK_IPS[@]}"
 do
   echo $ip  >> $INVENTORY
 done
+
+####################################################
+# Generate inventory of cloudboot KVM Hypervisors
+####################################################
 
 read -ra CB_KVM_IPS -d '' <<<$(mysql -p${DB_PASSWORD} ${DB} -u ${DB_USERNAME} -h ${DB_HOST} --port=${DB_PORT} -se \
 "SELECT ip_address FROM hypervisors WHERE hypervisor_type = 'kvm' AND enabled = 1 AND mac IS NOT NULL AND backup = 0")
@@ -45,6 +61,10 @@ do
   echo $ip  >> $INVENTORY
 done
 
+####################################################
+# Generate inventory of cloudboot XEN Hypervisors
+####################################################
+
 read -ra CB_XEN_IPS -d '' <<<$(mysql -p${DB_PASSWORD} ${DB} -u ${DB_USERNAME} -h ${DB_HOST} --port=${DB_PORT} -se \
 "SELECT ip_address FROM hypervisors WHERE hypervisor_type = 'xen' AND enabled = 1 AND mac IS NOT NULL AND backup = 0")
 
@@ -53,6 +73,10 @@ for ip in "${CB_XEN_IPS[@]}"
 do
   echo $ip  >> $INVENTORY
 done
+
+####################################################
+# Generate inventory of cloudboot Backup Servers
+####################################################
 
 read -ra CB_BK_IPS -d '' <<<$(mysql -p${DB_PASSWORD} ${DB} -u ${DB_USERNAME} -h ${DB_HOST} --port=${DB_PORT} -se \
 "SELECT ip_address FROM hypervisors WHERE enabled = 1 AND mac IS NOT NULL AND backup = 1")

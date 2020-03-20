@@ -1,3 +1,5 @@
+# file: roles/static-bs/tasks/main.yml
+
 ---
 - name: Upgrade OnApp Backup Server installer package
   yum:

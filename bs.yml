@@ -1,3 +1,6 @@
+# file: bs.yml
+
+---
 - hosts: static_bs
   roles:
     - common

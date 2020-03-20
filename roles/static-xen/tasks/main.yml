@@ -1,3 +1,5 @@
+# file: roles/static-xen/tasks/main.yml
+
 ---
 - name: Upgrade XEN
   command: /onapp/onapp-hv-install/onapp-hv-xen-install.sh -a

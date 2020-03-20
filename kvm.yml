@@ -1,3 +1,6 @@
+# file: kvm.yml
+
+---
 - hosts: static_kvm
   roles:
     - common

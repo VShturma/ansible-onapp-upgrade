@@ -1,3 +1,5 @@
+# file: roles/static-kvm/tasks/main.yml
+
 ---
 - name: Upgrade KVM
   command: /onapp/onapp-hv-install/onapp-hv-kvm-install.sh -a

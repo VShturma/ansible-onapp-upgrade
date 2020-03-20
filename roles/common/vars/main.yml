@@ -1,2 +1,4 @@
+# file: roles/common/vars/main.yml
+
 ---
 onapp_version: 6.0
