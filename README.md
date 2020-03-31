@@ -10,15 +10,15 @@ Preferably under ```onapp``` user.
 
 ## Usage
 
-1. In the working directory run ```inventory.sh``` script in order to generate ```inventory``` file.
+1. In the working directory run ```generate_hosts.sh``` script in order to generate ```hosts``` file.
 Currently, the inventory is populated with both static and cloudboot resources. However, only static resources are used in the playbooks.
 
 ```
-./inventory.sh
+./generate_hosts.sh
 ```
 
 ```
-cat inventory
+cat hosts
 
 [static_kvm]
 10.76.0.104
@@ -52,13 +52,13 @@ onapp_version: 6.2
 You can upgrade the entire infrastrucure at once:
 
 ```
-ansible-playbook -i inventory site.yml
+ansible-playbook -i hosts site.yml
 ```
 
 or upgrade 1 group only. For example, KVM Hypervisors:
 
 ```
-ansible-playbook -i inventory kvm.yml
+ansible-playbook -i hosts kvm.yml
 ```
 
 ## Contributing
